@@ -1,0 +1,55 @@
+\documentclass[a4paper]{article}
+\usepackage[top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage[default]{cantarell}
+
+
+\xdef\invoicenum{2023/01/31}
+\xdef\companyname{Alan Moore}
+\xdef\companyaddress{ul. Alpejska 3A, 50-552 Wroclaw, Poland}
+\xdef\companyvatid{PL1234567890}
+
+\xdef\bankname{Santander Bank Polska S.A.}
+\xdef\bankiban{PL1111222233334444}
+\xdef\bankswift{ACKXXDXX}
+\xdef\bankaddress{ul. Pirenejska 2B, 50-343 Wroclaw, Poland}
+
+\xdef\invoiceename{Elvis Presley}
+\xdef\invoiceeaddress{ul. Sudecka 1C, 50-232 Wroclaw, Poland}
+\xdef\invoiceevatid{PL0987654321}
+
+\begin{document}
+
+\begin{minipage}[c][15em][t]{0.55\textwidth}
+  % Invoicer details
+  \textbf{\companyname{}}\\
+  \companyvatid{}\\
+  \companyaddress{}
+
+  \vspace{1em}
+
+  \bankname{}\\
+  \bankiban{}\\
+  SWIFT: \bankswift{}\\
+  \bankaddress{}
+
+  % Invoicee details
+  \vspace{2em}
+
+  \textcolor{gray}{Bill to:}\\
+  \invoiceename\\
+  \invoiceevatid\\
+  \invoiceeaddress
+
+\end{minipage}
+% Invoice details
+\begin{minipage}[c][15em][t]{0.40\textwidth}
+
+  \flushright
+  \Huge{INVOICE}\\
+  \Large\textcolor{gray}{\# \invoicenum{}}
+
+\end{minipage}
+
+\end{document}
