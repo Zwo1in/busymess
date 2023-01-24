@@ -3,6 +3,7 @@
 \usepackage{xcolor}
 \usepackage[T1]{fontenc}
 \usepackage[default]{cantarell}
+\usepackage{tabularx}
 
 
 \xdef\invoicenum{2023/01/31}
@@ -19,9 +20,13 @@
 \xdef\invoiceeaddress{ul. Sudecka 1C, 50-232 Wroclaw, Poland}
 \xdef\invoiceevatid{PL0987654321}
 
+\xdef\invoicedate{31.01.2023}
+\xdef\invoiceduedate{14.02.2023}
+\xdef\invoicebalance{5,555.00}
+
 \begin{document}
 
-\begin{minipage}[c][15em][t]{0.55\textwidth}
+\begin{minipage}[c][17em][t]{0.55\textwidth}
   % Invoicer details
   \textbf{\companyname{}}\\
   \companyvatid{}\\
@@ -35,21 +40,54 @@
   \bankaddress{}
 
   % Invoicee details
-  \vspace{2em}
+  \vfill
 
   \textcolor{gray}{Bill to:}\\
-  \invoiceename\\
+  \textbf{\invoiceename}\\
   \invoiceevatid\\
   \invoiceeaddress
 
 \end{minipage}
 % Invoice details
-\begin{minipage}[c][15em][t]{0.40\textwidth}
+\begin{minipage}[c][17em][t]{0.40\textwidth}
 
   \flushright
   \Huge{INVOICE}\\
-  \Large\textcolor{gray}{\# \invoicenum{}}
+  \Large{\textcolor{gray}{\# \invoicenum{}}}
+
+  \vfill
+
+  \normalsize
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabularx}{\textwidth}{X r}
+    \textcolor{gray}{Date:} & \invoicedate{}\\
+    \textcolor{gray}{Due date:} & \invoiceduedate{}\\
+    \hline
+    \textbf{Balance due:} & \textbf{\texteuro\invoicebalance{}}\\
+  \end{tabularx}
 
 \end{minipage}
+
+\vspace{4em}
+
+\noindent\rule{\textwidth}{1pt}
+
+\noindent
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{0.99\textwidth}{X c c c}
+  \textbf{Item} & \textbf{Quantity} & \textbf{Rate} & \textbf{Amount}\\
+  \hline
+  \emph{Software development} & 1 & \texteuro\invoicebalance{} & \texteuro\invoicebalance{}\\
+\end{tabularx}
+
+\bigskip
+
+\flushright
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{l r}
+  \textcolor{gray}{Subtotal:} & \texteuro\invoicebalance{}\\
+  \textcolor{gray}{Tax (0\%):} & \texteuro0.00\\
+  \textcolor{gray}{Total:} & \texteuro\invoicebalance{}\\
+\end{tabular}
 
 \end{document}
