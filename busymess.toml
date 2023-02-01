@@ -1,0 +1,26 @@
+[invoice]
+id = "2023/01/31"
+date = "31.01.2023"
+due_date = "14.02.2023"
+
+[invoicer]
+name = "Alan Moore"
+address = "ul. Alpejska 3A, 50-552 Wroclaw, Poland"
+vat_id = "PL1234567890"
+
+[invoicee]
+name = "Elvis Presley"
+address = "ul. Sudecka 1C, 50-232 Wroclaw, Poland"
+vat_id = "PL0987654321"
+
+[account]
+iban = "PL1111222233334444"
+bank_code = { type = "SWIFT", value = "ACKXXDXX" }
+bank_name = "PDK"
+address = "ul. Pirenejska 2B, 50-343 Wroclaw, Poland"
+
+[[product]]
+description = "Software development"
+quantity = 1
+rate = 5000
+tax = 0

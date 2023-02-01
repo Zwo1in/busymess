@@ -1,5 +1,12 @@
-use anyhow::{Context, Result};
+use std::process::Command;
+
+use anyhow::{bail, Context as AnyContext, Result};
+use askama::Template;
 use chrono::NaiveDate;
+use figment::{
+    providers::{Format, Toml},
+    Figment,
+};
 use reqwest::get;
 use serde_json::Value as Json;
 
@@ -11,8 +18,7 @@ fn previous_day<DATE: Into<NaiveDate>>(date: DATE) -> NaiveDate {
     date.into() - chrono::Duration::days(1)
 }
 
-#[tokio::main]
-async fn main() -> Result<()> {
+async fn euro_rate() -> Result<()> {
     let mut rate_date = chrono::Utc::now().date_naive();
     let last_euro_rate: Json = loop {
         rate_date = previous_day(rate_date);
@@ -35,5 +41,21 @@ async fn main() -> Result<()> {
         .context(format!("Getting rate from {last_euro_rate}"))?;
 
     println!("{day} - {table}: {rate}");
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    let _ = euro_rate().await;
+
+    let main_tex: busymess::Config = Figment::new()
+        .merge(Toml::file("busymess.toml"))
+        .extract()?;
+    std::fs::write("main.tex", main_tex.render()?)?;
+
+    if !Command::new("pdflatex").arg("main.tex").status()?.success() {
+        bail!("Pdflatex failed");
+    }
+
     Ok(())
 }

@@ -5,24 +5,23 @@
 \usepackage[default]{cantarell}
 \usepackage{tabularx}
 
+\xdef\invoicenum{<<invoice.id>>}
+\xdef\invoicedate{<<invoice.date>>}
+\xdef\invoiceduedate{<<invoice.due_date>>}
+\xdef\invoicebalance{<<product[0].rate>>}
 
-\xdef\invoicenum{2023/01/31}
-\xdef\companyname{Alan Moore}
-\xdef\companyaddress{ul. Alpejska 3A, 50-552 Wroclaw, Poland}
-\xdef\companyvatid{PL1234567890}
+\xdef\companyname{<<invoicer.name>>}
+\xdef\companyaddress{<<invoicer.address>>}
+\xdef\companyvatid{<<invoicer.vat_id>>}
 
-\xdef\bankname{Santander Bank Polska S.A.}
-\xdef\bankiban{PL1111222233334444}
-\xdef\bankswift{ACKXXDXX}
-\xdef\bankaddress{ul. Pirenejska 2B, 50-343 Wroclaw, Poland}
+\xdef\bankname{<<account.bank_name>>}
+\xdef\bankiban{<<account.iban>>}
+\xdef\bankcode{<<account.bank_code>>}
+\xdef\bankaddress{<<account.address>>}
 
-\xdef\invoiceename{Elvis Presley}
-\xdef\invoiceeaddress{ul. Sudecka 1C, 50-232 Wroclaw, Poland}
-\xdef\invoiceevatid{PL0987654321}
-
-\xdef\invoicedate{31.01.2023}
-\xdef\invoiceduedate{14.02.2023}
-\xdef\invoicebalance{5,555.00}
+\xdef\invoiceename{<<invoicee.name>>}
+\xdef\invoiceeaddress{<<invoicee.address>>}
+\xdef\invoiceevatid{<<invoicee.vat_id>>}
 
 \begin{document}
 
@@ -37,9 +36,9 @@
 
   \vspace{1em}
 
-  \bankname{}\\
   \bankiban{}\\
-  SWIFT: \bankswift{}\\
+  \bankcode{}\\
+  \bankname{}\\
   \bankaddress{}
 
   % Invoicee details
@@ -58,17 +57,6 @@
   \Huge{INVOICE}\\
   \Large{\textcolor{gray}{\# \invoicenum{}}}
 
-  \vfill
-
-  \normalsize
-  \renewcommand{\arraystretch}{1.25}
-  \begin{tabularx}{\textwidth}{X r}
-    \textcolor{gray}{Date:} & \invoicedate{}\\
-    \textcolor{gray}{Due date:} & \invoiceduedate{}\\
-    \hline
-    \textbf{Balance due:} & \textbf{\texteuro\invoicebalance{}}\\
-  \end{tabularx}
-
 \end{minipage}
 
 \vspace{4em}
@@ -85,12 +73,29 @@
 
 \bigskip
 
+\normalsize
 \flushright
 \renewcommand{\arraystretch}{1.5}
-\begin{tabular}{l r}
+\begin{tabularx}{0.28\textwidth}{X r}
   \textcolor{gray}{Subtotal:} & \texteuro\invoicebalance{}\\
   \textcolor{gray}{Tax (0\%):} & \texteuro0.00\\
   \textcolor{gray}{Total:} & \texteuro\invoicebalance{}\\
-\end{tabular}
+\end{tabularx}
+
+\bigskip
+
+\centering
+\noindent\rule{0.99\textwidth}{0.3pt}
+
+\bigskip
+
+\flushright
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{0.28\textwidth}{X r}
+  \textcolor{gray}{Date:} & \invoicedate{}\\
+  \textcolor{gray}{Due date:} & \invoiceduedate{}\\
+  \hline
+  \textbf{Balance due:} & \textbf{\texteuro\invoicebalance{}}\\
+\end{tabularx}
 
 \end{document}
